@@ -1,0 +1,5 @@
+function getUserName.(user) {
+  return user.profile.name.toUpperCase();
+}
+
+console.log(getUserName(null));

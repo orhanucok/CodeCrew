@@ -1,0 +1,95 @@
+{
+  "name": "codecrew",
+  "displayName": "CodeCrew",
+  "description": "Safe AI code changes inside VS Code.",
+  "version": "0.3.0",
+  "publisher": "codecrew",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orhanucok/CodeCrew.git"
+  },
+  "homepage": "https://github.com/orhanucok/CodeCrew#readme",
+  "bugs": {
+    "url": "https://github.com/orhanucok/CodeCrew/issues"
+  },
+  "keywords": [
+    "ai",
+    "coding",
+    "code-review",
+    "openrouter",
+    "vscode-extension"
+  ],
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onView:codecrew.sidebar",
+    "onCommand:codecrew.fix",
+    "onCommand:codecrew.explain",
+    "onCommand:codecrew.improve",
+    "onCommand:codecrew.addTypes",
+    "onCommand:codecrew.writeTests",
+    "onCommand:codecrew.undo",
+    "onCommand:codecrew.modelSettings",
+    "onCommand:codecrew.providerSettings"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "codecrew.fix", "title": "CodeCrew: Fix this" },
+      { "command": "codecrew.explain", "title": "CodeCrew: Explain this" },
+      { "command": "codecrew.improve", "title": "CodeCrew: Improve selected code" },
+      { "command": "codecrew.addTypes", "title": "CodeCrew: Add types" },
+      { "command": "codecrew.writeTests", "title": "CodeCrew: Write tests" },
+      { "command": "codecrew.undo", "title": "CodeCrew: Undo Last AI Change", "enablement": "codecrew.canUndo" },
+      { "command": "codecrew.setApiKey", "title": "CodeCrew: Set OpenRouter API Key" },
+      { "command": "codecrew.showHistory", "title": "CodeCrew: Show Run History" },
+      { "command": "codecrew.modelSettings", "title": "CodeCrew: Advanced Settings — Models" },
+      { "command": "codecrew.providerSettings", "title": "CodeCrew: Advanced Settings — Providers" }
+    ],
+    "menus": {
+      "editor/context": [
+        { "command": "codecrew.fix", "group": "codecrew@1", "when": "editorHasSelection" },
+        { "command": "codecrew.explain", "group": "codecrew@2", "when": "editorHasSelection" },
+        { "command": "codecrew.improve", "group": "codecrew@3", "when": "editorHasSelection" },
+        { "command": "codecrew.addTypes", "group": "codecrew@4", "when": "editorHasSelection" },
+        { "command": "codecrew.writeTests", "group": "codecrew@5", "when": "editorHasSelection" }
+      ],
+      "problems/context": [
+        { "command": "codecrew.fix", "group": "navigation@1" },
+        { "command": "codecrew.explain", "group": "navigation@2" }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codecrew",
+          "title": "CodeCrew",
+          "icon": "media/codecrew.svg"
+        }
+      ]
+    },
+    "views": {
+      "codecrew": [
+        {
+          "id": "codecrew.sidebar",
+          "name": "Safe Changes",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -w -p .",
+    "test": "npm run compile && node --test dist/test/**/*.test.js",
+    "package": "npm run test && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-vsix.ps1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.7.2"
+  }
+}
