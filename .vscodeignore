@@ -1,0 +1,9 @@
+.npm-cache/**
+.git/**
+.github/**
+.vscode/**
+src/**
+tsconfig.json
+**/*.map
+**/*.test.js
+**/*.test.d.ts
