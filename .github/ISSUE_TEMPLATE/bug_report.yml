@@ -1,0 +1,32 @@
+name: Hata bildirimi
+description: Tekrarlanabilir bir CodeCrew hatasını bildirin
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Hata
+      description: Ne olduğunu ve ne olmasını beklediğinizi anlatın.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: CodeCrew sürümü
+      placeholder: 0.3.0
+    validations:
+      required: true
+  - type: input
+    id: vscode
+    attributes:
+      label: VS Code sürümü
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Tekrarlama adımları
+      description: Gizli bilgi veya API anahtarı eklemeyin.
+    validations:
+      required: true
